@@ -1,0 +1,101 @@
+﻿@model TravelBookingProject.ViewModel.EmployeeChildrenInfoViewModel
+@{
+    ViewBag.Title = "EmployeeChildrenInfoForm";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>                    @*We are doing this to validate the field at client side*@
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<style>
+    body {
+        background-color: white;
+    }
+</style>
+
+@*<h2 class="text-center" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color:black; font-size:45px; font-weight:200">Employee Children Info </h2>*@
+
+<div style="border: 2px solid black; background-color:white;border-radius:8px"><h2 style="font-weight: bold; text-align:center">Employee Children Info</h2></div>
+<br />
+<br />
+<div class="alert-success">
+    <strong>
+        @TempData["message"]
+    </strong>
+</div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" });
+<table class="table" style="font-size:15px; background-color:white; table-layout:fixed">
+    <tr>
+        <td style="text-align:center; background-color:lightseagreen">@Html.Label("Children Name")</td>
+        <td>
+            @Html.TextBoxFor(m => m.ChildrenName, new { @class = "form-control" })
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align:center; background-color:lightseagreen">@Html.Label("Date of Birth")</td>
+        <td>
+            @Html.EditorFor(m => m.ChildDateOfBirth, new { @class = "form-control" })
+            &nbsp;&nbsp;
+            <img src="~/Content/images/cal5.png" style="height:40px; width:40px" />
+        </td>
+
+
+
+    </tr>
+    <tr>
+        <td style="text-align:center; background-color:lightseagreen">
+            @Html.Label("Primary Citizenship")
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.PrimaryCitizenship, new { @class = "form-control" })
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align:center; background-color:lightseagreen">
+            @Html.Label("Dependent for tax purpose in home country")
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.Dependent_for_tax_purpose_in_home_country, new { @class = "form-control" })
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:center">
+            <input type="submit" class="btn btn-success" value="Add" style="height:50px; width:100px; font-size:20px; background-color:lightseagreen; color:black;" onclick="if (confirm('Are the details entered by you correct?')) {return true;} else {return false;}" />
+        </td>
+    </tr>
+</table>
+
+<div class="center-block" style="text-align:right">
+    <input class="btn btn-success" value="Next>>" type="submit" formaction="@Url.Action("NextPage","EmployeeChildrenInfo" )" formmethod="post" style="height:50px; width:100px; font-size:20px; background-color:lightseagreen; color:black; margin-left:1000px" />
+</div>
+       
+        @*<div class="center-block" style="text-align:center">
+            <input type="submit" class="btn btn-success" value="Add" style="height:50px; width:100px; font-size:20px; background-color:lightseagreen; color:black;" onclick="if (confirm('Are the details entered by you correct?')) {return true;} else {return false;}" />*@
+
+            @*<input class="btn btn-success" value="Cancel" formaction="@Url.Action("Clear","EmployeeChildrenInfo" )" formmethod="post" style="height:50px; width:100px; font-size:20px; background-color:orangered; color:black;margin-left:200px" name="cancel" type="submit" />*@
+        @*</div>*@
+}
+    @section Scripts {
+
+        @Scripts.Render("~/bundles/jqueryui")
+        @Styles.Render("~/Content/cssjqryUi")
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("input[type=datetime]").datepicker({
+                    dateFormat: "yy-m-dd",
+                    changeMonth: true,
+                    changeYear: true,
+
+
+                });
+
+
+            });
+        </script>
+
+    }
+
+
